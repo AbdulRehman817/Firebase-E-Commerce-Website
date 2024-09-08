@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="tailwind.css">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./product.css">
+      <title>Document</title>
+  </head>
+  <div role="status" id="loader">
+    <svg aria-hidden="true" style='width:100px;height:100px; justify-content:center;margin-left:580px;margin-top:240px' class=" inline w-9 h-9 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+    </svg>
+    <span class="sr-only">Loading...</span>
+</div>
+
+<nav class="bg-white border-gray-200 dark:bg-gray-900" id="main" style="display: none;">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+  <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo"  />
+    
+      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+  </a>
+  <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+    <button style="margin-right: 30px;" ><a href="./addProduct.html">Add Product </a></button>
+    <button style="margin-right: 90px;" ><a href="./userProduct.html">User's Product </a></button>
+      <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+        <span class="sr-only">Open user menu</span>
+        <img class="w-8 h-8 rounded-full" src="" alt="" id="logo" >
+      </button>
+      <!-- Dropdown menu -->
+      <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+        <div class="px-4 py-3">
+          <span class="block text-sm text-gray-900 dark:text-white" id="userName"></span>
+          <span class="block text-sm  text-gray-500 truncate dark:text-gray-400" id="userEmail"></span>
+        </div>
+        <ul class="py-2" aria-labelledby="user-menu-button">
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" id="logOut">Sign out</a>
+          </li>
+        </ul>
+      </div>
+      <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+    </button>
+  </div>
+  <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
+    <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      <li>
+        <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
+      </li>
+      <li>
+        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+      </li>
+      <li>
+        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+      </li>
+      <li>
+        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Pricing</a>
+      </li>
+      <li>
+        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+      </li>
+    </ul>
+  </div>
+  </div>
+</nav>
+
+  
+
+<!-- Product_Container -->
+<div style="display: none;" class="main">
+  <!-- Category  -->
+  <div class="mt-10">
+    <h1  class="text-center text-black font-bold text-3xl">Accessories</h1>
+  </div>
+  <!-- All Products -->
+  <div style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+    <div>
+  <figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+  <img src="https://shopivate.pk/wp-content/uploads/2023/12/1000320434.jpg" alt="sample85" class="img"/>
+
+  <figcaption class="p-5">
+    <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title" >Title:Headphones</h5>
+    <p class="text-gray-700 font-bold mb-3" class="price">price:1200</p>
+    <button style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+   
+  </figcaption><a href="#"></a>
+</figure>
+</div>
+
+<div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+  <img src="https://www.edazabd.com/images/products/3hsgn6zlj8lh9f5/lenovo.webp" alt="sample85" class="img"/>
+
+  <figcaption class="p-5">
+    <h5 class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title:Blueetooth</h5>
+    <p class="text-gray-700 font-bold mb-3" class="price">price:1400</p>
+    <button style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn" >Read More Details</button>
+   
+  </figcaption><a href="#"></a>
+</figure>
+</div>
+
+
+
+<div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+  <img src="https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1651815195.20164864!800x800!85.jpg "class='img' alt="sample85"/>
+
+  <figcaption class="p-5">
+    <h5 class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title:Chargers</h5>
+    <p class="text-gray-700 font-bold mb-3" class="price">price:1600</p>
+    <button  style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+   
+  </figcaption><a href="#"></a>
+</figure>
+</div>
+
+</div>
+
+<div class="mt-10">
+  <h1  class="text-center text-black font-bold text-3xl">Cars</h1>
+  
+</div>
+
+<!-- *                                Cars -- *                                               >
+
+<!-- All Products -->
+<div style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+  <div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://www.bolnews.com/wp-content/uploads/2023/07/FotoJet-2023-07-19T181326.273-635x430.jpg" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title:Mehran</h5>
+  <p class="text-gray-700 font-bold mb-3" class="price">price:120000</p>
+  <button  style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class='btn'>Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+
+<div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://cdn.motor1.com/images/mgl/mMEQ8j/114:0:1820:1366/2024-honda-civic-rs-jdm.webp" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title:Honda Civic</h5>
+  <p  class="text-gray-700 font-bold mb-3" class="price">price:140000</p>
+  <button  style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+
+
+
+<div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://cache1.pakwheels.com/system/car_generation_pictures/6425/original/Honda_City_Front.jpg?1651424945" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title:Honda City</h5>
+  <p class="text-gray-700 font-bold mb-3" class="price" >price:160000</p>
+  <button  style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+
+</div>
+<!-- *                                Cars -- *                                               >
+
+
+
+
+
+<!-- *                                Mobile Watches -- *                                               >
+<!-- All Products -->
+<div class="mt-10">
+  <h1  class="text-center text-black font-bold text-3xl">Men's Accessories</h1>
+  
+</div>
+
+<div style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+  <div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6tvSFNl0j7AVBptjXGLrr9rfLvqSji_bvSA&s" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold"class="title">Title:Mobile Watch</h5>
+  <p  class="text-gray-700 font-bold mb-3" class="price">price:12000</p>
+  <button  style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+
+<div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr4b961BTwi7TEAWryani4ixZu1iipZxuph2k2gPnj7y5oIifTK-RxEFVhKXFp0Pp-u84&usqp=CAU" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title:Apple Watch</h5>
+  <p  class="text-gray-700 font-bold mb-3" class="price">price:14000</p>
+  <button style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"  class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+
+
+
+<div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmYZE3Lr2m97InY_nGjl4v31XU3hMrD7z131kGrGjoGIVoYTbxSHn8O4ZXDG_zkps0sYU&usqp=CAU" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="tilte">Title: Samsung Watch</h5>
+  <p  class="text-gray-700 font-bold mb-3" class="price">price:16000</p>
+  <button  style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+</div>
+<!-- *                                Mobile Watches -- *                                               >
+
+
+
+<!-- *                                Analog Watches -- *                                               >
+
+<!-- All Products -->
+<div style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+  <div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://currenwatches.com.pk/cdn/shop/products/HTB1ORelLSrqK1RjSZK9q6xyypXaW_jpg_Q90_jpg_1445x.jpg?v=1699511500" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title:Chronograph Watch</h5>
+  <p  class="text-gray-700 font-bold mb-3" class="price">price:17000</p>
+  <button  style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+
+<div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://nishatiprime.com/wp-content/uploads/2024/04/CURREN-Casual-Sport-Watches-for-Men-Top-Brand-Luxury-Military-Leather-Wrist-Watch-Man-Clock-Fashion-4-600x600.webp" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title:Wrist Watch</h5>
+  <p  class="text-gray-700 font-bold mb-3" class="price">price:18000</p>
+  <button  style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+
+
+
+<div>
+<figure  class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://m.media-amazon.com/images/I/51kBw-flXHL._AC_SY350_.jpg" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold"  class="title">Title:Wrist Watch</h5>
+  <p  class="text-gray-700 font-bold mb-3" class="title">price:16000</p>
+  <button  style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+</div>
+
+</div>
+
+<!-- *                                Analog watches -- *                                               >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- *                                Shirts -- *                                               >
+
+
+
+
+
+
+<!-- All Products -->
+<div style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+  <div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://rog.com.pk/wp/wp-content/uploads/2020/12/Rog-Linen-Shirt-White-40587-1.jpg" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title: Light White Casual Shirt</h5>
+  <p  class="text-gray-700 font-bold mb-3" class="price">price:1700</p>
+  <button  style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>   
+</figure>
+</div>
+
+<div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://rog.com.pk/wp/wp-content/uploads/2020/12/Rog-Linen-Shirt-Orange-40144-1.jpg" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title: Orange Casual Shirt</h5>
+  <p  class="text-gray-700 font-bold mb-3" class="price">price:1800</p>
+  <button  style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+
+
+
+<div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img  class="img" src="https://i5.walmartimages.com/asr/0fc79379-85f9-4605-be17-2731c2295779.8b75a060b2fd8747375c0d364ee3a110.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title:Offwhite Casual Shirt</h5>
+  <p  class="text-gray-700 font-bold mb-3" class="price">price:1600</p>
+  <button  style="margin-top: 10px;" type="button" id="btn" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+</div>
+
+</div>
+
+
+
+<!-- *                                Shirts -- *                                               >
+
+
+
+
+
+
+
+
+
+
+
+<!-- *                                Jeans -- *                                               >
+
+<!-- All Products -->
+<div style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+  <div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://rukminim2.flixcart.com/image/850/1000/xif0q/jean/y/l/2/28-mj-02-leriya-fashion-original-imagvp5dggmqgjak.jpeg?q=20&crop=false" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title:  Black Casual Baggy Jeans</h5>
+  <p  class="text-gray-700 font-bold mb-3"class="price">price:1700</p>
+  <button  style="margin-top: 10px;" type="button" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>   
+</figure>
+</div>
+
+<div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://m.media-amazon.com/images/I/81nysX+bAyL._SY550_.jpg" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5  class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title: Light Blue Casual Jeans</h5>
+  <p  class="text-gray-700 font-bold mb-3" class="price">price:1800</p>
+  <button  style="margin-top: 10px;" type="button" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+
+
+
+<div>
+<figure class="snip1418 mt-20" style="margin-left: 30px; border-radius: 10px; margin-top: 70px;" >
+<img class="img" src="https://cdn.shopify.com/s/files/1/0266/6276/4597/files/300982489GREY_3.jpg?v=1720612709" alt="sample85"/>
+
+<figcaption class="p-5">
+  <h5 class="tracking-tight text-gray-900 mb-2 text-2xl font-bold" class="title">Title:Light Grey Casual Shirt</h5>
+  <p  class="text-gray-700 font-bold mb-3" class="price">price:1600</p>
+  <button  style="margin-top: 10px;" type="button" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" class="btn">Read More Details</button>
+ 
+</figcaption><a href="#"></a>
+</figure>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<script src="./profile.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+<script src="./signup.js" type="module"></script>
+<script src="./pageProducts.js" type="module"></script>
+</body>
+</html>
+<!-- *                                Jeans -- *                                               >
+
+  
+ 
+
