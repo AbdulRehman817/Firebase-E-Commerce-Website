@@ -203,110 +203,15 @@ const uploadProducts = async () => {
   }
 };
 
-// const getAllProducts = async () => {
-//   if (isProductsLoaded) {
-//     console.log("Products already loaded.");
-//     return; // Stop if products have already been loaded
-//   }
-
-//   // Show the loader
-//   document.getElementById("loader").style.display = "block";
-
-//   try {
-//     // Fetch products from Firestore
-//     const productsSnapshot = await getDocs(collection(db, "productData"));
-
-//     // Get the container where products will be displayed
-//     const productContainer = document.getElementById("productContainer");
-//     productContainer.innerHTML = ""; // Clear previous content
-
-//     let productsByCategory = {}; // Store products categorized
-
-//     productsSnapshot.forEach((doc) => {
-//       let product = doc.data();
-//       let productId = doc.id;
-
-//       if (displayedProductIds.includes(productId)) return; // Skip already displayed products
-
-//       let category = product.category;
-
-//       // Group products by category
-//       if (!productsByCategory[category]) {
-//         productsByCategory[category] = [];
-//       }
-
-//       productsByCategory[category].push(product);
-//       displayedProductIds.push(productId); // Mark product as displayed
-//     });
-
-//     // Display products by category
-//     for (let category in productsByCategory) {
-//       // Create a container for each category
-//       let categorySection = document.createElement("div");
-//       categorySection.style.marginBottom = "30px"; // Add space between categories
-
-//       // Add category heading
-//       let heading = document.createElement("h2");
-//       heading.textContent = category.toUpperCase();
-//       heading.style.textAlign = "center"; // Center the heading
-//       heading.style.marginBottom = "15px"; // Add space between the heading and products
-
-//       // Add the heading to the category section
-//       categorySection.appendChild(heading);
-
-//       // Create a flex container for the products
-//       let productsRow = document.createElement("div");
-//       productsRow.style.display = "flex"; // Flexbox layout
-//       productsRow.style.flexWrap = "wrap"; // Allow products to wrap if there are too many
-//       productsRow.style.justifyContent = "space-around"; // Spread products evenly across the row
-
-//       // Display products line by line in flex rows
-//       productsByCategory[category].forEach((product) => {
-//         let productCard = document.createElement("div");
-//         productCard.style.width = "30%"; // Each product card takes 30% of the row
-//         productCard.style.marginBottom = "20px"; // Space between products
-
-//         productCard.innerHTML = `
-//           <img src="${product.productImg}" style="width: 100%; height: 200px; object-fit: cover;" />
-//           <p><strong>${product.title}</strong></p>
-//           <p>Price: ${product.price}</p>
-//           <p>Condition: ${product.condition}</p>
-//         `;
-
-//         // Add the product card to the flex row
-//         productsRow.appendChild(productCard);
-//       });
-
-//       // Add the products row to the category section
-//       categorySection.appendChild(productsRow);
-
-//       // Append the entire category section to the product container
-//       productContainer.appendChild(categorySection);
-//     }
-
-//     isProductsLoaded = true; // Prevent further fetching
-//   } catch (error) {
-//     console.error("Error fetching products:", error);
-//   } finally {
-//     // Hide the loader
-//     document.getElementById("loader").style.display = "none";
-//   }
-// };
-
-// // Call the function to display products on page load
-// getAllProducts();
-
-// Example call to fetch products from a specific category
-
-// // Example call to fetch products from a specific category
-
 // Flag to prevent reloading products
+let productsLoaded = false;
 
 // Function to fetch and display products
-const getAllProducts = async () => {
-  if (isProductsLoaded) {
+const getProducts = async () => {
+  // Check if products are already loaded
+  if (productsLoaded) {
     console.log("Products already loaded.");
-    return; // Stop if products are already loaded
+    return; // Stop if products have already been loaded
   }
 
   // Show the loader
@@ -314,71 +219,71 @@ const getAllProducts = async () => {
 
   try {
     // Fetch products from Firestore
-    const productsSnapshot = await getDocs(collection(db, "productData"));
+    const snapshot = await getDocs(collection(db, "productData"));
 
-    // Get the container where products will be displayed
-    const productContainer = document.getElementById("productContainer");
-    productContainer.innerHTML = ""; // Clear any existing content
+    // Get the container for products
+    const container = document.getElementById("productContainer");
+    container.innerHTML = ""; // Clear existing content
 
-    // Object to store products by category
-    let productsByCategory = {};
+    // Store products by category
+    let categories = {};
 
-    // Process each product
-    productsSnapshot.forEach((doc) => {
+    snapshot.forEach((doc) => {
       let product = doc.data();
       let category = product.category;
 
-      // Initialize category if not already present
-      if (!productsByCategory[category]) {
-        productsByCategory[category] = [];
+      // Initialize category if not present
+      if (!categories[category]) {
+        categories[category] = [];
       }
 
       // Add product to the category
-      productsByCategory[category].push(product);
+      categories[category].push(product);
     });
 
     // Display products for each category
-    for (let category in productsByCategory) {
+    for (let category in categories) {
       // Create a section for the category
-      let categorySection = document.createElement("div");
-      categorySection.style.marginBottom = "30px"; // Space between categories
+      let section = document.createElement("div");
+      section.style.marginBottom = "30px";
 
-      // Create and style the category heading
+      // Create and style the heading
       let heading = document.createElement("h2");
       heading.textContent = category.toUpperCase();
       heading.style.textAlign = "center";
       heading.style.marginBottom = "15px";
-      categorySection.appendChild(heading);
+      section.appendChild(heading);
 
-      // Create a flex container for the products
-      let productsRow = document.createElement("div");
-      productsRow.style.display = "flex";
-      productsRow.style.flexWrap = "wrap";
-      productsRow.style.justifyContent = "space-around";
+      // Create a flex container for products
+      let row = document.createElement("div");
+      row.style.display = "flex";
+      row.style.flexWrap = "wrap";
+      row.style.justifyContent = "space-around";
 
       // Add product cards to the row
-      productsByCategory[category].forEach((product) => {
-        let productCard = document.createElement("div");
-        productCard.style.width = "30%";
-        productCard.style.marginBottom = "20px";
+      categories[category].forEach((product) => {
+        let card = document.createElement("div");
+        card.style.width = "30%";
+        card.style.marginBottom = "20px";
 
-        productCard.innerHTML = `
+        card.innerHTML = `
           <img src="${product.productImg}" style="width: 100%; height: 200px; object-fit: cover;" />
           <p><strong>${product.title}</strong></p>
           <p>Price: ${product.price}</p>
           <p>Condition: ${product.condition}</p>
         `;
-        productsRow.appendChild(productCard);
+
+        row.appendChild(card);
       });
 
-      // Add the products row to the category section
-      categorySection.appendChild(productsRow);
-      // Add the category section to the main container
-      productContainer.appendChild(categorySection);
+      // Add the row to the section
+      section.appendChild(row);
+      // Add the section to the container
+      container.appendChild(section);
     }
 
-    // Set flag to prevent further fetching
-    isProductsLoaded = true;
+    // Set flag to prevent further loading
+    productsLoaded = true;
   } catch (error) {
     console.error("Error fetching products:", error);
   } finally {
@@ -388,7 +293,7 @@ const getAllProducts = async () => {
 };
 
 // Call the function to display products on page load
-getAllProducts();
+getProducts();
 
 window.showProductDetails = (id) => {
   localStorage.setItem("productId", id);
