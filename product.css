@@ -101,3 +101,56 @@
   left: 0;
   right: 0;
 }
+
+/* Product grid container */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Spacing between product cards */
+}
+
+/* Individual product card */
+.product-card {
+  flex: 1 1 calc(33.33% - 20px); /* Three products per row */
+  box-sizing: border-box;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Make product images responsive */
+.product-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.product-info {
+  margin-top: 10px;
+}
+
+.product-title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.product-price {
+  color: #888;
+  margin-bottom: 15px;
+}
+
+.product-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.product-button:hover {
+  background-color: #0056b3;
+}

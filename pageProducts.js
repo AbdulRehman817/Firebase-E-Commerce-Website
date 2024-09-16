@@ -8,7 +8,7 @@ const getData = async () => {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    const { title, productImg, price } = docSnap.data();
+    const { title, productImg, price, condition } = docSnap.data();
     console.log(docSnap.data());
     productContainer.innerHTML += `<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-[400px]">
         <a href="#">
@@ -20,6 +20,7 @@ const getData = async () => {
             </a>
          
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">${price}</p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">condition:${condition}</p>
            <button onclick="showProductDetails('${doc.id}')" 
            type="button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Click for more details</button>
             

@@ -31,6 +31,7 @@ import {
   limit,
   getDocs,
   getDoc,
+  where,
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -84,4 +85,5 @@ export {
   getDocs,
   updateProfile,
   getDoc,
+  where,
 };
