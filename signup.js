@@ -186,7 +186,7 @@ signup_btn.addEventListener("click", (e) => {
       // console.log("account created successfully", createData);
       window.location = "./profile.html";
     } catch (e) {
-      console.error("Error adding document: ", e);
+      console.error("Error adding d ocument: ", e);
     }
   };
   uploadData();
